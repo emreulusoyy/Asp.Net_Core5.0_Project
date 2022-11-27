@@ -12,6 +12,12 @@ namespace BusinessLayer.Concrete
     public class MessageManager : IMessageService
     {
         IMessageDal _messageDal;
+
+        public MessageManager(IMessageDal messageDal)
+        {
+            _messageDal = messageDal;
+        }
+
         public void TAdd(Message t)
         {
             _messageDal.Insert(t);
@@ -22,19 +28,24 @@ namespace BusinessLayer.Concrete
             _messageDal.Delete(t);
         }
 
-        public Message TGetByID(int id)
-        {
-            return _messageDal.GetByID(id);
-        }
-
         public List<Message> TGetList()
         {
             return _messageDal.GetList();
         }
 
+        public Message TGetByID(int id)
+        {
+            return _messageDal.GetByID(id);
+        }
+
         public void TUpdate(Message t)
         {
-            _messageDal.Update(t);  
+            throw new NotImplementedException();
+        }
+
+        public List<Message> TGetListbyFilter()
+        {
+            throw new NotImplementedException();
         }
     }
 }
