@@ -5,15 +5,15 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Core_Proje.Controllers
 {
-    public class SkillController : Controller
+    public class ServiceController1cs : Controller
     {
-        SkillManager skillManager = new SkillManager(new EfSkillDal()); 
+        ServiceManager serviceManager = new ServiceManager(new EfServiceDal());
         public IActionResult Index()
         {
-            ViewBag.v1 = "Yetenek Listesi";
-            ViewBag.v2 = "Yetenekler";
-            ViewBag.v3 = "Yetenek Listesi";
-            var values = skillManager.TGetList();
+            ViewBag.v1 = "Hizmet Listesi";
+            ViewBag.v2 = "Hizmetler";
+            ViewBag.v3 = "Hizmet Ekleme";
+            var values = serviceManager.TGetList();
             return View(values);
         }
 
@@ -26,36 +26,38 @@ namespace Core_Proje.Controllers
             return View();
         }
 
-        [HttpPost]  
-        public IActionResult AddSkill(Skill p)
+        [HttpPost]
+        public IActionResult AddSkill(Service p)
         {
-            skillManager.TAdd(p);
+            serviceManager.TAdd(p);
             return RedirectToAction("Index");
 
         }
 
-        public IActionResult DeleteSkill(int id)
+        public IActionResult DeleteService(int id)
         {
-            var values = skillManager.TGetByID(id);
-            skillManager.TDelete(values);
+            var values = serviceManager.TGetByID(id);
+            serviceManager.TDelete(values);
             return RedirectToAction("Index");
         }
         [HttpGet]
-        public IActionResult EditSkill(int id)
-        {
-            var values = skillManager.TGetByID(id);  
-            return View(values);
-        }
-
-        [HttpPost]
-        public IActionResult EditSkill(Skill p)
+        public IActionResult EditService(int id)
         {
             ViewBag.v1 = "Yetenek Güncelleme";
             ViewBag.v2 = "Yetenekler";
             ViewBag.v3 = "Yetenek Güncelleme";
-            skillManager.TUpdate(p);
-            return RedirectToAction("Index");
+            var values = serviceManager.TGetByID(id);
+            return View(values);
         }
 
+        [HttpPost]
+        public IActionResult EditService(Service p)
+        {
+            ViewBag.v1 = "Yetenek Güncelleme";
+            ViewBag.v2 = "Yetenekler";
+            ViewBag.v3 = "Yetenek Güncelleme";
+            serviceManager.TUpdate(p);
+            return RedirectToAction("Index");
+        }
     }
 }
