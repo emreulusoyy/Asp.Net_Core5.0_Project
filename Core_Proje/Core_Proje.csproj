@@ -30,6 +30,7 @@
   <ItemGroup>
     <Folder Include="Areas\Writers\Data\" />
     <Folder Include="Areas\Writers\ViewComponents\" />
+    <Folder Include="wwwroot\userimage\" />
   </ItemGroup>
 
 </Project>
