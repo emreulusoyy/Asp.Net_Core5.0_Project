@@ -9,8 +9,7 @@ namespace Core_Proje.Areas.Writers.Controllers
 {
     [AllowAnonymous]
     [Area("Writers")]
-    //[Route("Writers/[controller]/[action]")]
-    [Authorize]
+    [Route("Writers/[controller]/[action]")] 
     public class LoginController : Controller
     {
         private readonly SignInManager<WriterUser> _signInManager;
@@ -43,6 +42,12 @@ namespace Core_Proje.Areas.Writers.Controllers
                 }
             }
             return View(); 
+        }
+
+        public async Task<IActionResult> LogOut()
+        {
+            await _signInManager.SignOutAsync();
+            return RedirectToAction("Index", "Login");
         }
     }
 }
